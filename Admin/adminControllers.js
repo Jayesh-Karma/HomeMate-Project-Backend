@@ -6,8 +6,9 @@ const emailSender = require("../utils/emailSender");
 
 const getPendingServiceProviders = async(req,res) =>{
     try{
-        const getServiceProviders = await user.find({ role:"service_provider", isVerified: false}).select('-password');
-
+        const getServiceProviders = await user.find({ isVerified: false}).select('-password');
+        
+        console.log(getServiceProviders);
         return res.status(200).json({
             success:true,
             service_providers:getServiceProviders
