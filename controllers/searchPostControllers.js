@@ -175,6 +175,34 @@ const account_details = async(req,res) =>{
     }
 }
 
+// get all details from a service provider
+const get_all_details = async(req, res) =>{
+  try {
+    const id = req.params.id;
+    const accountDetails = await user.findById(id).populate("workProof");
+
+    if(!accountDetails){
+      return res.status(404).json({
+        success: false,
+        message:"Can't find anything related to service",
+      });
+  
+    }
+    return res.status(200).json({
+      success: true,
+      message:"All Details of service provider",
+      userDetails:accountDetails
+    });
+
+  } catch (error) {
+    console.error(error)
+    return res.status(400).json({
+      success: false,
+      message:"Can't fetch posts ---> server error",
+    });
+  }
+}
+
 
 module.exports = {get_All_Cities_Of_ServiceProviders,
                     getAllLocation,
@@ -182,4 +210,5 @@ module.exports = {get_All_Cities_Of_ServiceProviders,
                     searchPostsByService, 
                     search_serviceProviders_By_service,
                     account_details,
+                    get_all_details
                 }

@@ -35,7 +35,9 @@ const getPost = async(req, res) =>{
 const uploadPost = async(req,res) =>{
     try {
         const id = req.user.id;
+        // console.log(req)
         const uploadableFile = req.files.post;
+
         const { service_type, caption, location, priceFrom, priceUpto} = req.body;
 
         const ext = path.extname(uploadableFile.name);
@@ -56,7 +58,7 @@ const uploadPost = async(req,res) =>{
         }
         else if(ext === '.mp4' || ext=== '.mov' || ext === '.avi' || ext === '.mkv'){
             uploadFile = await uploadVideo(uploadableFile, "Video Posts"); 
-            console.log(uploadFile)
+            // console.log(uploadFile)
         }
 
         if(!uploadFile){
@@ -110,7 +112,7 @@ const uploadPost = async(req,res) =>{
         console.log(error);
          return res.status(400).json({
             success:false,
-            message:"upload failed ---> server error"
+            message:"upload failed --->" + error.message
         })
     }
 }

@@ -20,7 +20,7 @@ router.put("/edit", checkUser, editAllDetails);
 
 
 //upload files
-router.get("/get_post/:id", checkUser, getPost);
+router.get("/get_post/:id", getPost);
 router.post("/upload_post", checkUser, uploadPost);
 router.put("/edit_post/:id", checkUser, editPost);
 router.delete("/delete_post/:id", checkUser, deletePost);

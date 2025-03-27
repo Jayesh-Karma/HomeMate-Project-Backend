@@ -8,6 +8,7 @@ const getAllServiceProvider = async(req,res) =>{
         const users = await user.find();
         // all users contain only the name, img, city and role
         const filteredUsers = users.map(user => ({
+            _id: user._id,
             name: user.name,
             img: user.profileImgUrl,
             city: user.city,
@@ -64,11 +65,12 @@ const getServiceProvidersByService = async (req, res) =>{
 }
 
 
+
 const getAllDetails =async(req,res) =>{
     try {
         const id = req.user.id;
-        const accountDetail = await user.findById(id);
-
+        const accountDetail = await user.findById(id).populate("workProof");
+        // console.log(accountDetail)
         if(!accountDetail){
             return res.status(400).json({
                 success:false,
@@ -79,16 +81,7 @@ const getAllDetails =async(req,res) =>{
         return res.status(200).json({
             success:true,
             message:"Details fetched successfully",
-            userDetails:{
-                name:name,
-                email:email,
-                phone:phone,
-                email:email,
-                role:role,
-                profileImg:profileImgUrl,
-                serviceDetails:serviceDetails,
-                workProof:workProof
-            }
+            userDetails: accountDetail
         })
 
 
@@ -109,7 +102,7 @@ const editAllDetails = async(req,res) =>{
         const id = req.user.id;
         const account = await user.findById(id);
         const profileImg = req.files.profileImg;
-        console.log(profileImg)
+        // console.log(profileImg)
         const {name, email, phone, role, serviceDetails} = req.body;
 
         if(profileImg){

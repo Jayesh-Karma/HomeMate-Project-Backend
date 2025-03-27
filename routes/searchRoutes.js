@@ -1,5 +1,5 @@
 const express = require("express");
-const { get_All_Cities_Of_ServiceProviders, getAllLocation, searchPostByLocation, searchPostsByService, search_serviceProviders_By_service, account_details } = require("../controllers/searchPostControllers");
+const { get_All_Cities_Of_ServiceProviders, getAllLocation, searchPostByLocation, searchPostsByService, search_serviceProviders_By_service, account_details, get_all_details } = require("../controllers/searchPostControllers");
 const { getAllServiceProvider, getServiceProvidersByService } = require("../controllers/serviceProviderControllers/service_provider_Controllers");
 
 
@@ -20,5 +20,6 @@ router.get("/posts_of_services", searchPostsByService); //posts according to ser
 router.get("/service_providers", search_serviceProviders_By_service); // service providers according to services
 router.get("/service_provider_account_details/:id", account_details); // details of that service provider
 
+router.get("/get_service_provider_details/:id", get_all_details);
 
 module.exports = router;
