@@ -18,7 +18,13 @@ const customerSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-   
+    password:{
+        type:String,
+        required:true
+    },
+    current_service:{
+        type:String,
+    },
     hired_service_providers:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User"

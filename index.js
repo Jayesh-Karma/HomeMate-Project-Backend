@@ -7,7 +7,7 @@ const fileUpload = require("express-fileupload");
 const adminRoutes = require("./Admin/adminRoutes.js");
 const authRoutes = require("./routes/authRoutes.js");
 const searchRoutes = require("./routes/searchRoutes.js");
-
+const customerRoutes = require("./routes/customerRoutes.js");
 
 dotenv.config();
 
@@ -15,7 +15,7 @@ dotenv.config();
 // middlewares -->
 app.use(cors({
     origin: [ "http://localhost:5173", 'https://homemate-services.vercel.app'],  // Only allow this domain to make requests
-    methods: ['GET', 'POST'], // Allowed HTTP methods
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials:true  // Allowed headers
   }));
@@ -48,6 +48,8 @@ mongo.connection
 
     //search apis to search different things
     app.use("/search", searchRoutes)
+
+    app.use("/customer",customerRoutes)
 
 // listening to port here ---->
 app.listen( process.env.PORT, ()=>{

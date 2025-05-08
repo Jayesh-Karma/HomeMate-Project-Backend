@@ -1,7 +1,6 @@
 exports.newHireNotification = (serviceProvider_name, serviceProvider_email, serviceProvider_phone, serviceProvider_service, service_needed, 
-  user_name, user_id, user_email, user_phone) =>{
-    return
-    `
+  user_name, user_id, user_email, user_phone, date, time) =>{
+    return `
   <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
     <div style="background-color: #1d4ed8; padding: 20px; text-align: center;">
       <!-- <img src="cid:logo" alt="Homemate Logo" style="width: 120px; height: auto;"> -->
@@ -18,15 +17,15 @@ exports.newHireNotification = (serviceProvider_name, serviceProvider_email, serv
       <li><strong>Service Provider:</strong> ${serviceProvider_name}</li>
       <li><strong>Service:</strong> ${serviceProvider_service} </li>
       <li><strong>Contact: </strong> Email: ${serviceProvider_email}, Phone: ${serviceProvider_phone}</li>
-      <li><strong>Date:</strong> ${Date.now}</li>
+      <li><strong>Date:</strong> ${date}</li>
+      <li><strong>Time:</strong> ${time}</li>
       </ul>
+
       
       <h3 style="color: #1d4ed8; font-size: 18px;">Customer Details/ Hired By:</h3>
        <ul style="line-height: 1.6; color: #4b5563;">
-        <li><strong>Service Provider:</strong></li>
-        <li><strong>Service:</strong> [Service Type]</li>
-        <li><strong>Hired by:</strong> [User's Name]</li>
-        <li><strong>Date:</strong> [Date of Hire]</li>
+        <li><strong>Customer Name : ${user_name}</strong></li>
+        <li><strong>Customer Contact:</strong> Email: ${user_email}, Phone: ${user_phone}</li>
       </ul>
 
       <h3 style="color: #1d4ed8; font-size: 18px;">Next Steps:</h3>

@@ -60,6 +60,10 @@ const UserSchema = new mongoose.Schema({
     type:mongoose.Schema.Types.ObjectId,
     ref:'Post'
   }],
+  homemateProjects:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref:'Service'
+  }],
   reported:{
     type:Boolean,
     default:false

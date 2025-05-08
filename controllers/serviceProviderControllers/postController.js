@@ -10,7 +10,7 @@ const user = require("../../models/user");
 const getPost = async(req, res) =>{
     try {
         const postId = req.params.id;
-        const postData = await Post.findById(postId);
+        const postData = await Post.findById(postId).populate("serviceProvider");
 
         if(!postData){
             return res.status(400).json({
@@ -35,7 +35,7 @@ const getPost = async(req, res) =>{
 const uploadPost = async(req,res) =>{
     try {
         const id = req.user.id;
-        // console.log(req)
+        console.log(req.files)
         const uploadableFile = req.files.post;
 
         const { service_type, caption, location, priceFrom, priceUpto} = req.body;
@@ -58,7 +58,7 @@ const uploadPost = async(req,res) =>{
         }
         else if(ext === '.mp4' || ext=== '.mov' || ext === '.avi' || ext === '.mkv'){
             uploadFile = await uploadVideo(uploadableFile, "Video Posts"); 
-            // console.log(uploadFile)
+            console.log(uploadFile)
         }
 
         if(!uploadFile){

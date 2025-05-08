@@ -18,7 +18,6 @@ router.post("/login", loginUser);
 router.get("/details", checkUser, getAllDetails);
 router.put("/edit", checkUser, editAllDetails);
 
-
 //upload files
 router.get("/get_post/:id", getPost);
 router.post("/upload_post", checkUser, uploadPost);

@@ -4,7 +4,23 @@ const generateToken = require("../../utils/generateToken");
 
 
 const registerUser = async(req, res) =>{
-    const {name, email, password, role, serviceDetails, phone, city} = req.body;
+    const { 
+        name,
+        email,
+        phone,
+        role,
+        city,
+        state,
+        noOfProjects,
+        yearsoFExperience,
+        serviceDetails,
+        bio,
+        password
+    } = req.body;
+    const {profile} = req.files;
+
+    console.log(profile)
+    console.log(req.files)
 
     if(!name || !email || !password || !role || !serviceDetails || !phone || !city){
         return res.status(400).json({
@@ -23,9 +39,9 @@ const registerUser = async(req, res) =>{
         })
     }
 
-    const savingUser = await user.create({
-        name, email, password, role, serviceDetails, phone, city
-    })
+    // const savingUser = await user.create({
+    //     name, email, password, role, serviceDetails, phone, city
+    // })
 
     if(!savingUser){
         return res.status(400).json({
@@ -46,6 +62,7 @@ const loginUser = async(req,res) =>{
     try{
         let {email, password} = req.body;
 
+        console.log(email, password)
         if(!email || !password){
             return res.status(400).json({
                 success:false,
@@ -55,6 +72,12 @@ const loginUser = async(req,res) =>{
 
         const checkDetails = await user.findOne({email});
 
+        if(!checkDetails){
+            return res.status(400).json({
+                success:false,
+                message:"User does not exist"
+            })
+        }
         const checkPass = await checkDetails.matchPassword(password);
         if(!checkPass){
             return res.status(400).json({
@@ -86,6 +109,7 @@ const loginUser = async(req,res) =>{
         })
     }
     catch(error){
+        console.log(error)
         return res.status(400).json({
             success:false,
             message:"Login failed, try again later",

@@ -101,9 +101,9 @@ const editAllDetails = async(req,res) =>{
     try {
         const id = req.user.id;
         const account = await user.findById(id);
-        const profileImg = req.files.profileImg;
+        const profileImg = req?.files?.profileImg;
         // console.log(profileImg)
-        const {name, email, phone, role, serviceDetails} = req.body;
+        const {name, email, phone, role, serviceDetails, bio} = req.body;
 
         if(profileImg){
             
@@ -138,7 +138,7 @@ const editAllDetails = async(req,res) =>{
         if(phone){ account.phone = phone; }
         if(role){  account.role = role; }
         if(serviceDetails){  account.serviceDetails = serviceDetails; }
-
+        if(bio){  account.bio = bio; }
 
         const updatedAccount = await account.save();
         if(!updatedAccount){
@@ -227,18 +227,6 @@ const unmark_status = async(req, res) =>{
             success:false,
             message:"Can't mark the status ---> server error"
         })
-    }
-}
-
-
-// hiring button for service providers
-const hire_service_provider = async(req, res) =>{
-    try {
-        // 1. send mail with details of user to service provider 
-        // 2. send mail to admin regarding the hiring of service provider and user
-        // 3. 
-    } catch (error) {
-        
     }
 }
 
